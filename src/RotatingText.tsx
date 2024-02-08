@@ -68,12 +68,8 @@ const RotatingText: React.FC<RotatingTextProps> = ({ words, delay = 1400 }) => {
       setWordIndex((index) => (index + 1 < words.length ? index + 1 : 0));
     }, delay + 1200);
 
-    // clean up timeouts on dismount
-    return () => {
-      if (timeout) {
-        clearTimeout(timeout);
-      }
-    };
+    // clean up timeouts on dismount and re-renders
+    return () => clearTimeout(timeout);
   }, [delay, wordIndex, words]);
 
   return (
